@@ -1,0 +1,7 @@
+out/
+build/
+Makefile
+*.o
+*.a
+test/out
+test/build
