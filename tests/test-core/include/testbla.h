@@ -2,6 +2,7 @@
 #define TESTBLA_H
 
 #include <QtTest/QtTest>
+#include "autotest.h"
 
 class TestBla : public QObject
 {
@@ -9,5 +10,7 @@ class TestBla : public QObject
 	private slots:
 		void sumUpShouldReturnCorrectValue();
 };
+
+DECLARE_TEST(TestBla)
 
 #endif

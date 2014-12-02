@@ -16,6 +16,4 @@ void TestBla::sumUpShouldReturnCorrectValue()
 	QVERIFY(result == 4);
 }
 
-QTEST_MAIN(TestBla)
-
 
