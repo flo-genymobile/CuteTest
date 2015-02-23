@@ -47,8 +47,13 @@ namespace AutoTest
             const char *testName = test->metaObject()->className();
             qDebug() << "Now running: " << testName;    
             
+            QString resultFilePath = QString(argv[3]) + testName + ".xml";
+            char rawPath[resultFilePath.size() + 1];
+            strcpy(rawPath, resultFilePath.toLocal8Bit().data());
+            char *newArgv[] = {argv[0], argv[1], argv[2], rawPath };    
+            
             int ret = 0;
-            ret = QTest::qExec(test, argc, argv);
+            ret = QTest::qExec(test, argc, newArgv);
             
             if (ret > 0) {
                 qDebug() << testName << "ran with errors";
