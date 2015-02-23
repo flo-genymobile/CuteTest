@@ -1,5 +1,6 @@
 #ifndef AUTOTEST_H
 #define AUTOTEST_H
+
 #include <QTest>
 #include <QList>
 #include <QString>
@@ -42,12 +43,22 @@ namespace AutoTest
 
     inline int run(int argc, char **argv)
     {
-        int ret = 0;
-        foreach(QObject *test, testList())
-        {
-            ret += QTest::qExec(test, argc, argv);
+        foreach(QObject *test, testList()) {
+            const char *testName = test->metaObject()->className();
+            qDebug() << "Now running: " << testName;    
+            
+            int ret = 0;
+            ret = QTest::qExec(test, argc, argv);
+            
+            if (ret > 0) {
+                qDebug() << testName << "ran with errors";
+            }
         }
-        return ret;
+
+        
+        qDebug() << "All test were ran";
+
+        return 0;
     }
 }
 
