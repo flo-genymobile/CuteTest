@@ -1,3 +1,9 @@
+message(*** tests.pro ***)
+include(tests-common.pri)
+
+message(installdir set to $$INSTALLDIR)
+message(destdir set to $$DESTDIR)
+
 TEMPLATE = subdirs
 
 SUBDIRS = test-lib/gmock \
@@ -5,6 +11,8 @@ SUBDIRS = test-lib/gmock \
 
 test-core.depends = test-lib/gmock
 
-test.commands = $$PWD/test-core/out/test-core -xml -o $$PWD/out/results.xml
+test.commands = $$INSTALLDIR/test-core -xml -o $$INSTALLDIR/results.xml
 
-QMAKE_EXTRA_TARGET += test
+QMAKE_EXTRA_TARGETS += test
+
+QMAKE_CLEAN += -r Makefile $$DESTDIR/* $$DESTDIR/lib/*

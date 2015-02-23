@@ -1,0 +1,9 @@
+#default output directories
+DEFAULT_DESTDIR = $$PWD/out
+DEFAULT_INSTALLDIR = $$PWD/../dist
+
+DESTDIR = $$DEFAULT_DESTDIR
+
+isEmpty(INSTALLDIR) {
+    INSTALLDIR = $$DEFAULT_INSTALLDIR
+}

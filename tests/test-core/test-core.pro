@@ -1,3 +1,5 @@
+message(**** test-core.pro ****)
+include(../tests-common.pri)
 include(../../project.pri)
 
 #add path to headers of GMOCK test framework
@@ -18,15 +20,12 @@ TEMPLATE = app
 
 QT += testlib 
 
-DESTDIR = $$PWD/out/
+QMAKE_LFLAGS += -Wl,-rpath,\\$\\$ORIGIN
 
 OBJECTS_DIR = $$PWD/build/
-
 MOC_DIR = $$OBJECTS_DIR
 
-QMAKE_CLEAN += $$MOC_DIR/* \
-    $$OBJECTS_DIR/* \
-    $$DESTDIR/*
+QMAKE_CLEAN += -r Makefile $$MOC_DIR/* $$OBJECTS_DIR/* $$DESTDIR/*
 
 SOURCES += src/testbla.cpp \
     src/testfoo.cpp \
@@ -38,4 +37,8 @@ HEADERS += include/testbla.h \
     include/mocks/foomock.h
     include/autotest.h
 
-LIBS += -L$$PWD/../test-lib/gmock/lib -lgmock
+LIBS += -L$$DESTDIR/lib -lgmock
+
+# make install 
+target.path = $$INSTALLDIR
+INSTALLS += target

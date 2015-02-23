@@ -1,4 +1,14 @@
+message(*** project.pro ***)
 include(project.pri)
+
+DESTDIR = $$PWD/out
+DEFAULT_INSTALLDIR = $$PWD/dist
+isEmpty(INSTALLDIR) {
+    INSTALLDIR = $$DEFAULT_INSTALLDIR
+}
+
+message(installdir set to $$INSTALLDIR)
+message(destdir set to $$DESTDIR)
 
 INCLUDEPATH += $$PWD/include/
  
@@ -8,15 +18,13 @@ QT += core widgets
 
 TARGET = project
 
-DESTDIR = $$PWD/out/
-
-OBJECTS_DIR = $$PWD/build/
-
-MOC_DIR = $$OBJECTS_DIR
-
-QMAKE_CLEAN += MOC_DIR/* \
-    OBJECT_DIR/* \
-    DESTDIR/* 
-
 SOURCES += src/main.cpp
 
+OBJECTS_DIR = $$PWD/build/
+MOC_DIR = $$OBJECTS_DIR
+
+QMAKE_CLEAN += -r OBJECTS_DIR/* DESTDIR/* Makefile
+
+# make install
+target.path = $$INSTALLDIR
+INSTALLS += target
