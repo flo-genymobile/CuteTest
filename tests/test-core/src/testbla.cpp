@@ -13,7 +13,7 @@ void TestBla::sumUpShouldReturnCorrectValue()
         .WillByDefault(Return(8));   
     
 	int result = foo.sumUp(2, 2);
-	QVERIFY(result == 4);
+	QVERIFY(result == 8);
 }
 
 

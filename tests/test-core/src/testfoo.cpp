@@ -13,6 +13,6 @@ void TestFoo::substractShouldReturnCorrectValue()
         .WillByDefault(Return(60));
     
     int result = foo.substract(100, 50);
-    QVERIFY(result == 50);
+    QVERIFY(result == 60);
 }
 
